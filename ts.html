@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NumtoWords</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+     
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="tsstyle.css" type="text/css">
+    <link rel="shortcut icon" href="favicon3.ico" type="image/x-icon">
+    
+    <script type="text/javascript">
+        var nm;
+        var num=["zero"];
+        var num1=["one","two","three","four","five","six","seven","eight","nine"];
+        var num2=["ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"];
+        var num3=["twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"];
+        var num4=["hundred"]; var num5=["thousand"];
+       function ki()
+        {  
+             nm=parseInt(document.getElementById("n").value);
+             var p=document.getElementById("p");
+             
+
+             if (isNaN(nm)||nm<0) 
+             {    p.innerHTML="not a valid input".toUpperCase(); 
+            document.getElementById("i1").style.backgroundColor="maroon"; 
+            document.getElementById("i1").style.color="white"; }
+
+             else if(nm==0)
+                {  p.innerHTML=num[0].toUpperCase(); 
+                    document.getElementById("i1").style.backgroundColor="gray"; } 
+
+             else if(nm<10) 
+                {  p.innerHTML=num1[nm-1].toUpperCase(); 
+                    document.getElementById("i1").style.backgroundColor="lite-skyblue";  }
+
+             else if (nm>9 && nm<20) 
+             {   p.innerHTML=num2[nm-10].toUpperCase();  
+                document.getElementById("i1").style.backgroundColor="yellow"; 
+                document.getElementById("i1").style.color="red"; } 
+             
+             else if(nm>19 && nm<100)
+             {
+                    var re = nm%10; var q= parseInt(nm/10);
+                    p.innerHTML=(num3[q-2]+(re==0?" ":" "+num1[re-1])).toUpperCase();
+                    document.getElementById("i1").style.backgroundColor="orange";
+                    document.getElementById("i1").style.color="white";  
+             }
+
+             else if (nm>=100 && nm<1000)
+             {
+                var  re1=parseInt(nm%100); var q1= parseInt(nm/100);
+                if(re1==0)
+                 {
+                    p.innerHTML= (num1[q1-1]+" "+num4[re1]).toUpperCase();
+                  }
+                  else if (re1>=1 && re1<=9)
+                  {
+                    p.innerHTML= (num1[q1-1]+" "+num4[0]+" "+num1[re1-1]).toUpperCase();
+                  }
+                  else if (re1>9 && re1<20)
+                  {
+                    p.innerHTML= (num1[q1-1]+" "+num4[0]+" "+num2[re1-10]).toUpperCase();
+                  }
+                  else if (re1>=20 && re1<100)
+                  {
+                    var q11= parseInt(re1/10); var re11 =parseInt(re1%10);
+                    p.innerHTML= (num1[q1-1]+" "+num4[0]+" "+num3[q11-2]+(re11==0?" ":" "+num1[re11-1])).toUpperCase();
+                  }
+                  document.getElementById("i1").style.backgroundColor="lime";
+                    document.getElementById("i1").style.color="maroon";  
+             }
+             else{
+                p.innerHTML="out of range".toUpperCase();
+                document.getElementById("i1").style.color="white";  
+
+                    var my = document.getElementById("i1");
+                    var isRed=true;
+		
+                  var i3=setInterval(function() {
+                  if (isRed) {
+                  my.style.backgroundColor = "orange";
+                  } else {
+                  my.style.backgroundColor = "red";
+                    }
+                  isRed = !isRed;
+                  }, 50);
+		            
+               } setTimeout(function()  { clearInterval(i3);
+                
+               },2000);
+               
+       }            
+        
+    </script>
+</head>
+<body class="a1 c3" id="i1"> 
+    <h2>Enter values between 0 to 999</h2>
+    <div class="a2">
+        <input  type="number" id="n" onkeyup="ki()" min="0" max="999">
+        <p id="p"></p>
+    </div>
+ 
+</body>
+</html>
